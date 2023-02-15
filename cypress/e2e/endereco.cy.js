@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import EnderecoPage from '../support/page-objects/endereco.page'
 const dadosEndereco = require('../fixtures/endereco.json')
+const dadosEnderecoEntreg = require('../fixtures/enderecoentrega.json')
 
 describe('Funcionalidade Endereços - Faturamento e Entrega', () => {
     beforeEach(() => {
@@ -15,7 +16,7 @@ describe('Funcionalidade Endereços - Faturamento e Entrega', () => {
         cy.get('.woocommerce-message').should('contain', 'Endereço alterado com sucesso.')
     });
 
-    it.only('Deve fazer cadastro de faturamento com sucesso - Usando arquivos de dados', () => {
+    it('Deve fazer cadastro de faturamento com sucesso - Usando arquivos de dados', () => {
         EnderecoPage.editarEnderecoFaturamento(
             dadosEndereco[1].nome,
             dadosEndereco[1].sobrenome,
@@ -32,4 +33,23 @@ describe('Funcionalidade Endereços - Faturamento e Entrega', () => {
         cy.get('.woocommerce-message').should('contain', 'Endereço alterado com sucesso.')
     });
 
+    it('Deve fazer cadastro de endereço de entrega com sucesso', () => {
+        EnderecoPage.editarEnderecoEntrega('Jordan', 'Cracatua', 'INTANHANEM10', 'Brasil', 'Av. do Fim do Mundo', '30000', 'Florianopólis', 'Santa Catarina', '48620-630')
+        cy.get('.woocommerce-message').should('contain', 'Endereço alterado com sucesso.')
+    });
+
+    it('Deve fazer cadastro de endereço de entrega com sucesso - Usando arquivos de dados', () => {
+        EnderecoPage.editarEnderecoEntrega(
+            dadosEnderecoEntreg[0].nome,
+            dadosEnderecoEntreg[0].sobrenome,
+            dadosEnderecoEntreg[0].empresa,
+            dadosEnderecoEntreg[0].pais,
+            dadosEnderecoEntreg[0].endereco,
+            dadosEnderecoEntreg[0].numero,
+            dadosEnderecoEntreg[0].cidade,
+            dadosEnderecoEntreg[0].estado,
+            dadosEnderecoEntreg[0].cep
+        )
+        cy.get('.woocommerce-message').should('contain', 'Endereço alterado com sucesso.')
+    });
 });

@@ -17,7 +17,7 @@ context ('Funcionalidade Login', () =>{
         cy.get('.woocommerce-form > .button').click()
 
         cy.get('.page-title').should('contain' , 'Minha conta')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, aluno_ebac (não é aluno_ebac? Sair)')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, Aluno (não é Aluno? Sair)')
     })
 
     it('Deve fazer login com sucesso - Usando arquivo de dados', () => {
@@ -28,7 +28,7 @@ context ('Funcionalidade Login', () =>{
         cy.get('.page-title').should('contain' , 'Minha conta')
     });
 
-    it.only('Dever fazer login com sucesso - Usando fixture', () => {
+    it('Dever fazer login com sucesso - Usando fixture', () => {
         cy.fixture('perfil').then(dados => {
             cy.get('#username').type (dados.usuario)
             cy.get('#password').type (dados.senha, {log: false})
